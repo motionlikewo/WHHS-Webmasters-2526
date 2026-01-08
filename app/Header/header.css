@@ -11,7 +11,9 @@
                 -webkit-background-clip: text;
                 background-clip: text;
                 color: transparent;
-   
+   position: sticky;
+    top: 0;
+    
 }
 .nav-link {
     color: #ffffff;
