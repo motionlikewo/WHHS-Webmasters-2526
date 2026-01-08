@@ -3,8 +3,8 @@ import { Welcome } from "../welcome/welcome";
 import Header from "../Header/header";
 import "../Header/header.css";
 
-import Content from "../Content_Section/Content_Section";
-import "../Content_Section/Content_Section.css";
+import Content from "../Content_Preview/Content_Preview";
+import "../Content_Preview/Content_Preview.css";
 
 export function meta({}: Route.MetaArgs) {
   return [
