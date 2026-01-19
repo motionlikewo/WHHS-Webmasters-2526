@@ -1,0 +1,46 @@
+/* src/index.css */
+:root {
+  --sun-blue: #0077C8;   /* Florida Ocean */
+  --sun-yellow: #FFD700; /* Sunshine */
+  --sun-green: #2E8B57;  /* Palm Green */
+  --light-bg: #F0F8FF;
+  --dark-text: #333;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--light-bg);
+  color: var(--dark-text);
+}
+
+/* Utilities */
+.btn-primary {
+  background-color: var(--sun-blue);
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: #005a9e;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* Form Styles */
+input, select, textarea {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
