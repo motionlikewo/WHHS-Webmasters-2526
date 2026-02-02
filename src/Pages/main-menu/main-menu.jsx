@@ -18,7 +18,7 @@ import "./Content_Preview/Content_Preview.css";
 import "app/Image_Slider/Image_Slider.css";
 import ImageSlider from "../../Image_Slider/Image_Slider";
 
-export function meta({}: MetaArgs) {
+export function meta(){//({}: MetaArgs) {
   return [
     { title: "Sunshine Central" },
     { name: "description", content: "Welcome to Sunshine Central!" },
@@ -28,7 +28,7 @@ const tabs = ["Home","Spotlight","Tourism","Resources"];
 import i1 from "../Image_Slider/Test_Images/FLHSMV.png";
 import i2 from "../Image_Slider/Test_Images/WH.png";
 import i3 from "../Image_Slider/Test_Images/US.png";
-import type { MetaArgs } from "react-router";
+//import type { MetaArgs } from "react-router";
 export default function Home() {
   var h = <Header title="SunShine Central" tabs={tabs} />;
  
@@ -42,7 +42,7 @@ export default function Home() {
 }
 
 
-const ExamplePage: React.FC = () => {
+const ExamplePage = () => {
   return (
     <div style={styles.container}>
       <h1 style={styles.header}>Welcome to Sunshine Central!</h1>
@@ -62,7 +62,7 @@ const ExamplePage: React.FC = () => {
 
 //export default ExamplePage;
 
-const styles: { [key: string]: React.CSSProperties } = {
+const styles = {
   container: {
     maxWidth: "900px",
     margin: "0 auto",

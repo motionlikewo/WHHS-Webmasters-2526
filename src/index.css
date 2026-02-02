@@ -1,8 +1,8 @@
 /* src/index.css */
 :root {
-  --sun-blue: #0077C8;   /* Florida Ocean */
-  --sun-yellow: #FFD700; /* Sunshine */
-  --sun-green: #2E8B57;  /* Palm Green */
+  --sun-blue: #0077C8;
+  --sun-yellow: #FFD700;
+  --sun-green: #2E8B57;
   --light-bg: #F0F8FF;
   --dark-text: #333;
 }

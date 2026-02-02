@@ -1,6 +1,10 @@
 // src/pages/Home.js
 import React from 'react';
 import { resources } from '../data/mockData';
+import { Link } from 'react-router-dom';
+import i1 from "../Image_Slider/Test_Images/FLHSMV.png";
+import i2 from "../Image_Slider/Test_Images/WH.png";
+import i3 from "../Image_Slider/Test_Images/US.png";
 
 const Home = () => {
   // Select first 3 resources for spotlight
