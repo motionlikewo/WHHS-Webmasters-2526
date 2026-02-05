@@ -1,7 +1,7 @@
 //run with {node dataFetch.cjs}
 const fs = require('fs');
 
-const API_KEY = 'AIzaSyCpbI6ABrKBiEFENHRXcPrGP3M9ISP0Q2c';
+const API_KEY = process.env.APIkey;
 const LOCATION = '28.5383,-81.3792';
 const RADIUS = '10000'; // 10km
 const TYPE = 'food_bank';
