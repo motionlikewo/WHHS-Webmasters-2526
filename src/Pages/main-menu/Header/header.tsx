@@ -1,26 +1,20 @@
-
-//const tabs = ["Home","Spotlight","Tourism","Resources"];
-
 interface HeaderProps {
     title : string;
     tabs : string[];    
-
-
 }
 
 function Header({title, tabs}: HeaderProps){
 return <header className = "header-class">
 {title}
 
-<nav >
-    {tabs.map((tab) =>(
-      
-        <a href = {'#section'+tab}  className="nav-link"  >{tab}</a>
-    ))
+    <nav >
+        {tabs.map((tab) =>(
+            <a href = {'#section'+tab}  className="nav-link"  >{tab}</a>
+        ))
 
-    }
-</nav>
-
+        }
+    </nav>
+    
 </header>
 
 }
