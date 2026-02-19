@@ -8,6 +8,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@googlemaps/js-api-loader": "^2.0.2",
     "@tailwindcss/vite": "^4.1.18",
     "dotenv": "^17.2.3",
     "leaflet": "^1.9.4",

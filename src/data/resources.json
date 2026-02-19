@@ -4,15 +4,18 @@
     "name": "Orlando",
     "lat": 28.5383832,
     "lng": -81.3789269,
-    "address": "Orlando"
+    "address": "Orlando",
+    "rating": "N/A",
+    "category": "locality"
   },
   {
     "id": "ChIJKwL9_gF754gRpAqJys_VQMo",
     "name": "Grand Bohemian Orlando, Autograph Collection",
-    "lat": 28.5389083,
-    "lng": -81.3782669,
+    "lat": 28.5387046,
+    "lng": -81.37881940000001,
     "address": "325 South Orange Avenue, Orlando",
-    "rating": 4.4
+    "rating": 4.4,
+    "category": "lodging"
   },
   {
     "id": "ChIJAXxL_vx654gRzpoeMOGaVFM",
@@ -20,7 +23,8 @@
     "lat": 28.5417953,
     "lng": -81.3755058,
     "address": "191 East Pine Street, Orlando",
-    "rating": 4.3
+    "rating": 4.3,
+    "category": "lodging"
   },
   {
     "id": "ChIJ31NUZ-R654gRPBqM9PiY_k8",
@@ -28,7 +32,8 @@
     "lat": 28.5455818,
     "lng": -81.36966799999999,
     "address": "227 North Eola Drive B, Orlando",
-    "rating": 3.8
+    "rating": 3.8,
+    "category": "lodging"
   },
   {
     "id": "ChIJm0gB3vd654gRpYMYcTE7OC8",
@@ -36,7 +41,8 @@
     "lat": 28.55228919999999,
     "lng": -81.3836015,
     "address": "304 West Colonial Drive, Orlando",
-    "rating": 4.1
+    "rating": 4.1,
+    "category": "lodging"
   },
   {
     "id": "ChIJ_S1iOvF654gRtbuIdK1-nAU",
@@ -44,7 +50,8 @@
     "lat": 28.55416870000001,
     "lng": -81.3774566,
     "address": "730 North Magnolia Avenue, Orlando",
-    "rating": 4.4
+    "rating": 4.4,
+    "category": "lodging"
   },
   {
     "id": "ChIJj8r5hAF754gRV-zbPyaz_RE",
@@ -52,7 +59,8 @@
     "lat": 28.5364913,
     "lng": -81.37904089999999,
     "address": "500 South Orange Avenue, Orlando",
-    "rating": 4.3
+    "rating": 4.3,
+    "category": "lodging"
   },
   {
     "id": "ChIJHUPQKlZ654gR85uckl4JGO0",
@@ -60,7 +68,8 @@
     "lat": 28.547868,
     "lng": -81.384125,
     "address": "401 West Livingston Street, Orlando",
-    "rating": 4.3
+    "rating": 4.3,
+    "category": "point_of_interest"
   },
   {
     "id": "ChIJMfdMl_5654gRpZP9kPXrotU",
@@ -68,7 +77,8 @@
     "lat": 28.5429997,
     "lng": -81.3791995,
     "address": "46 North Orange Avenue, Orlando",
-    "rating": 4
+    "rating": 4,
+    "category": "point_of_interest"
   },
   {
     "id": "ChIJy2hQWgh754gR1faP54OYZE4",
@@ -76,7 +86,8 @@
     "lat": 28.5259777,
     "lng": -81.3816666,
     "address": "1400 Sligh Boulevard, Orlando",
-    "rating": 3.8
+    "rating": 3.8,
+    "category": "transit_station"
   },
   {
     "id": "ChIJ-9TcQw9754gR1jMwWGdjpkI",
@@ -84,7 +95,8 @@
     "lat": 28.5307992,
     "lng": -81.3776651,
     "address": "32 West Gore Street 5th Floor, Orlando",
-    "rating": 4.8
+    "rating": 4.8,
+    "category": "health"
   },
   {
     "id": "ChIJjVl2l_5654gRVQGtxg_3lnw",
@@ -92,7 +104,8 @@
     "lat": 28.5431712,
     "lng": -81.3791758,
     "address": "54 North Orange Avenue, Orlando",
-    "rating": 4.1
+    "rating": 4.1,
+    "category": "night_club"
   },
   {
     "id": "ChIJu3hNU-N654gR0x0I9_3iNvc",
@@ -100,7 +113,8 @@
     "lat": 28.5427628,
     "lng": -81.37092919999999,
     "address": "512 East Washington Street, Orlando",
-    "rating": 4.7
+    "rating": 4.7,
+    "category": "park"
   },
   {
     "id": "ChIJC9h9qwN754gR0x0TnGEHmRo",
@@ -108,7 +122,8 @@
     "lat": 28.535881,
     "lng": -81.37535199999999,
     "address": "211 North Lucerne Circle West, Orlando",
-    "rating": 4.6
+    "rating": 4.6,
+    "category": "lodging"
   },
   {
     "id": "ChIJ12n60al754gRnLj_amTqAZM",
@@ -116,7 +131,8 @@
     "lat": 28.5308067,
     "lng": -81.3835577,
     "address": "324 West Gore Street, Orlando",
-    "rating": 4.2
+    "rating": 4.2,
+    "category": "point_of_interest"
   },
   {
     "id": "ChIJo1f_hPl654gRXmZ13-wy_HM",
@@ -124,7 +140,8 @@
     "lat": 28.5482276,
     "lng": -81.37783379999999,
     "address": "425 North Orange Avenue #410, Orlando",
-    "rating": 2.3
+    "rating": 2.3,
+    "category": "local_government_office"
   },
   {
     "id": "ChIJQQqikv5654gRoabKIQmsFaM",
@@ -132,7 +149,8 @@
     "lat": 28.5443017,
     "lng": -81.3788037,
     "address": "131 North Orange Avenue Ste 105, Orlando",
-    "rating": 2.9
+    "rating": 2.9,
+    "category": "bank"
   },
   {
     "id": "ChIJyRaIJPx654gRhAbigeu9AMg",
@@ -140,21 +158,25 @@
     "lat": 28.5428406,
     "lng": -81.3777927,
     "address": "65 East Central Boulevard, Orlando",
-    "rating": 4.7
+    "rating": 4.7,
+    "category": "tourist_attraction"
+  },
+  {
+    "id": "ChIJ-aWzB2TNJIgRIrsZG_MvOrA",
+    "name": "Riffat K. Ahmed, M.D.",
+    "lat": 28.5261393,
+    "lng": -81.37693569999999,
+    "address": "1400 South Orange Avenue, Orlando",
+    "rating": 5,
+    "category": "doctor"
   },
   {
     "id": "ChIJo1f_hPl654gRdqEYph79_EE",
     "name": "Honorable A Thomas Mihok",
     "lat": 28.5482066,
     "lng": -81.3777424,
-    "address": "425 North Orange Avenue, Orlando"
-  },
-  {
-    "id": "ChIJo1f_hPl654gRNBJiQp7_m8o",
-    "name": "Honorable Sally DM Kest",
-    "lat": 28.548309,
-    "lng": -81.3780063,
-    "address": "425 North Orange Avenue # 1715, Orlando",
-    "rating": 1
+    "address": "425 North Orange Avenue, Orlando",
+    "rating": "N/A",
+    "category": "local_government_office"
   }
 ]

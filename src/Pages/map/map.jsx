@@ -1,26 +1,69 @@
-import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
+import React, { useState } from 'react';
 import resources from '../../data/resources.json';
+import './map.css';
+import GoogleMap from './googleMap.jsx';
 
-function MapPage() {
+const MapPage = () => {
+  const [searchTerm, setSearchTerm] = useState("");
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
+  //gets unique categories for the dropdown
+  const categories = ["All", ...new Set(resources.map(item => item.category))];
+
+  //filter logic
+  const filteredData = resources.filter(item => {
+    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
+                          item.address.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
+    
+    return matchesSearch && matchesCategory;
+  });
+
   return (
-    <div style={{ height: '600px', width: '100%' }}>
-      <MapContainer center={[28.5383, -81.3792]} zoom={12} style={{ height: '100%' }}>
-        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+    <div className="page">
+      <div className="filterContainer">
+        <input 
+          type="text" 
+          placeholder="Search locations..." 
+          className="search-bar"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
         
-        {resources.map(item => (
-          <Marker key={item.id} position={[item.lat, item.lng]}>
-            <Popup>
-              <strong>{item.name}</strong><br />
-              {item.address}<br />
-              Rating: {item.rating} / 5
-            </Popup>
-          </Marker>
-        ))}
-      </MapContainer>
+        <select 
+          className="category-select"
+          value={selectedCategory}
+          onChange={(e) => setSelectedCategory(e.target.value)}
+        >
+          {categories.map(cat => (
+            <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
+          ))}
+        </select>
+      </div>
+
+      <div className="layout">
+        <aside className="sidebar">
+          <h3>Results ({filteredData.length})</h3>
+          <div className="scroll-area">
+            {filteredData.map(item => (
+              <div key={item.id} className="resourceCard">
+                <h4>{item.name}</h4>
+                <p>{item.address}</p>
+                <div className="card-meta">
+                  <span className="badge">{item.category}</span>
+                  <span className="rating">⭐ {item.rating}</span>
+                </div>
+              </div>
+            ))}
+          </div>
+        </aside>
+
+          <div className="mapDisplay">
+           <GoogleMap locations={filteredData} />
+        </div>
+      </div>
     </div>
   );
-}
+};
 
 export default MapPage;

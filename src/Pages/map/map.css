@@ -1,0 +1,58 @@
+.page {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 70px); /* Adjust based on navbar height */
+}
+
+.filterContainer {
+  background: white;
+  padding: 1rem;
+  display: flex;
+  gap: 1rem;
+  border-bottom: 1px solid #ddd;
+}
+
+.layout {
+  display: flex;
+  height: 80vh;
+  width: 100%;
+}
+
+.sidebar {
+  width: 350px;
+  background: #f9f9f9;
+  border-right: 1px solid #ddd;
+  overflow-y: auto;
+  padding: 1rem;
+}
+
+.resourceCard {
+  background: white;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.container {
+  flex: 1;
+  background: #e5e3df;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge {
+  background: var(--sun-blue);
+  color: white;
+  padding: 2px 8px;
+  border-radius: 12px;
+  font-size: 0.8rem;
+}
+
+.mapDisplay {
+  flex: 1;      /* Take up remaining width */
+  height: 100%; /* Take up full height of .layout */
+  min-height: 400px; 
+  position: relative;
+}
