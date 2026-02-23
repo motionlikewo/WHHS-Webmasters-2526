@@ -1,10 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import { importLibrary, setOptions } from '@googlemaps/js-api-loader';
-
-setOptions({
-  apiKey: import.meta.env.VITE_GOOGLE_MAPS_API_KEY,
-  version: "weekly",
-});
 
 const GoogleMap = ({ locations }) => {
   const mapRef = useRef(null);
@@ -12,12 +6,14 @@ const GoogleMap = ({ locations }) => {
   const markersRef = useRef([]);
 
   useEffect(() => {
-    Promise.all([
-      importLibrary('maps'),
-      importLibrary('marker'),
-    ]).then(([ { Map }, { AdvancedMarkerElement } ]) => {
-      
-      // Initialization once
+    // This function initializes the map using the globally loaded Google script
+    const initMap = async () => {
+      // Check if google maps is loaded on the window
+      if (!window.google || !window.google.maps) return;
+
+      const { Map } = await google.maps.importLibrary("maps");
+      const { AdvancedMarkerElement } = await google.maps.importLibrary("marker");
+
       if (!googleMapRef.current && mapRef.current) {
         googleMapRef.current = new Map(mapRef.current, {
           center: { lat: 28.5383, lng: -81.3792 },
@@ -26,35 +22,21 @@ const GoogleMap = ({ locations }) => {
         });
       }
 
-      //Clear existing markers
+      // Standard marker rendering logic here...
       markersRef.current.forEach(m => m.map = null);
       markersRef.current = [];
-
-      //Add new ones
+      
       locations.forEach((loc) => {
         const marker = new AdvancedMarkerElement({
           map: googleMapRef.current,
-          position: { lat: loc.lat, lng: loc.lng },
+          position: { lat: Number(loc.lat), lng: Number(loc.lng) },
           title: loc.name,
         });
-
-        const infoWindow = new google.maps.InfoWindow({
-          content: `<div style="color:black; font-family: sans-serif;">
-                      <h4 style="margin:0">${loc.name}</h4>
-                      <p style="margin:5px 0">${loc.address}</p>
-                    </div>`,
-        });
-
-        marker.addListener("click", () => {
-          infoWindow.open({
-            anchor: marker,
-            map: googleMapRef.current,
-          });
-        });
-
         markersRef.current.push(marker);
       });
-    }).catch(e => console.error("Google Maps Error:", e));
+    };
+
+    initMap();
   }, [locations]);
 
   return <div ref={mapRef} style={{ width: '100%', height: '100%', minHeight: '450px' }} />;
