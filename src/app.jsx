@@ -14,10 +14,6 @@ const Home = () => (
 function App() {
   return (
     <div className="app-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh'}}>
-      <nav style={{ padding: '10px', background: '#f4f4f4', borderBottom: '1px solid #ccc' }}>
-        <Link to="/" style={{ marginRight: '15px' }}>Home</Link>
-        <Link to="/map">Map</Link>
-      </nav>
 
       <main style={{ flex: 1 }}>
         <Routes>

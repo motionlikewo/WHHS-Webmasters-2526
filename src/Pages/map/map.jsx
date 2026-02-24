@@ -1,66 +1,86 @@
 import React, { useState } from 'react';
-import resources from '../../data/resources.json';
 import './map.css';
+import '../../../index.css'
 import GoogleMap from './googleMap.jsx';
+import { Link } from 'react-router-dom';
 
 const MapPage = () => {
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
+  const [apiResults, setApiResults] = useState([]);
+  const categories = ["All", "Restaurant", "Park", "Library", "Hotel", "Museum"];
 
-  //gets unique categories for the dropdown
-  const categories = ["All", ...new Set(resources.map(item => item.category))];
-
-  //filter logic
-  const filteredData = resources.filter(item => {
-    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) || 
-                          item.address.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === "All" || item.category === selectedCategory;
-    
-    return matchesSearch && matchesCategory;
-  });
+  const hasSearched = searchTerm.trim().length > 0 || selectedCategory !== "All";
+  const handleResultsUpdate = (results) => {
+    setApiResults(results);
+  };
 
   return (
     <div className="page">
-      <div className="filterContainer">
-        <input 
-          type="text" 
-          placeholder="Search locations..." 
-          className="search-bar"
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-        />
-        
-        <select 
-          className="category-select"
-          value={selectedCategory}
-          onChange={(e) => setSelectedCategory(e.target.value)}
-        >
-          {categories.map(cat => (
-            <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
-          ))}
-        </select>
-      </div>
+      <header className="headerContainer">
+        <div className="navButtons">
+          <Link to="/"><button className="navBtn">Home</button></Link>
+          <button className="navBtn active">Map</button>
+        </div>
 
-      <div className="layout">
-        <aside className="sidebar">
-          <h3>Results ({filteredData.length})</h3>
-          <div className="scroll-area">
-            {filteredData.map(item => (
-              <div key={item.id} className="resourceCard">
-                <h4>{item.name}</h4>
-                <p>{item.address}</p>
-                <div className="card-meta">
-                  <span className="badge">{item.category}</span>
-                  <span className="rating">⭐ {item.rating}</span>
-                </div>
-              </div>
+        <div className="searchContainer">
+          <input 
+            type="text" 
+            placeholder="Search Florida (e.g. Pizza in Miami)..." 
+            className="searchInput"
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button className="searchBtn">Search</button>
+        </div>
+
+        <div className="filterDropdownContainer">
+          <select 
+            className="category-select"
+            value={selectedCategory}
+            onChange={(e) => setSelectedCategory(e.target.value)}
+          >
+            {categories.map(cat => (
+              <option key={cat} value={cat}>{cat}</option>
             ))}
+          </select>
+        </div>
+      </header>
+
+      <div className="content">
+        <aside className="sidebar">
+          <h3 className="sidebarTitle">Results ({apiResults.length})</h3>
+          <div className="scroll-area">
+            {apiResults.length > 0 ? (
+              apiResults.map(item => (
+                <div key={item.id} className="resultCard">
+                  <h4 className="resultTitle">{item.displayName}</h4>
+                  <p className="resultAddress">{item.formattedAddress}</p>
+                  <div className="card-meta">
+                    <span className="badge">{selectedCategory}</span>
+                    <span className="rating">⭐ {item.rating || "N/A"}</span>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div className="empty-state-message">
+                <p style={{ padding: '20px', color: '#666', textAlign: 'center' }}>
+                  {hasSearched 
+                    ? "Searching for live locations..." 
+                    : "Enter a search term to explore Florida."}
+                </p>
+              </div>
+            )}
           </div>
         </aside>
 
-          <div className="mapDisplay">
-           <GoogleMap locations={filteredData} />
-        </div>
+        <main className="mapDisplay">
+          <GoogleMap 
+            searchTerm={searchTerm} 
+            selectedCategory={selectedCategory} 
+            onResultsUpdate={handleResultsUpdate} 
+          />
+        </main>
       </div>
     </div>
   );
