@@ -1,8 +1,8 @@
 const express = require("express");
 const app = express(); 
+const mongoose = require("mongoose")
 
-
-
+mongoose.connect('mongodb://localhost/locations')
 
  const resources = { data:[
   {
@@ -67,5 +67,5 @@ app.get("/api",(req,res)=>{
 })
 */
 app.listen(8080,()=>{
-    console.log("Server Started on port 8080");
+    console.log("Server Started on port http://localhost:8080/");
 })
