@@ -1,8 +1,31 @@
+ sqlite = require("sqlite3").verbose()
+const sql3 = sqlite
+
+const DB = new sql3.Database("./mydata.db",sqlite.OPEN_READWRITE,connected)
+
+function connected(err){
+if(err){
+    console.log(err.message)
+    
+}
+console.log("Database connected")
+}
+let sql = 'CREATE TABLE IF NOT EXISTS locations(id INTEGER PRIMARY KEY, name TEXT NOT NULL, category TEXT NOT NULL, location TEXT NOT NULL, description TEXT NOT NULL,phone TEXT NOT NULL ) ';
+DB.run(sql,[],(err)=>{ 
+    if(err){
+        console.log("Error making table")
+        console.log(err.message)
+         
+        } 
+    console.log("Table Created")})
+
+
+
 const express = require("express");
 const app = express(); 
-const mongoose = require("mongoose")
+app.use(express.json());
 
-mongoose.connect('mongodb://localhost/locations')
+
 
  const resources = { data:[
   {
@@ -55,10 +78,71 @@ mongoose.connect('mongodb://localhost/locations')
   }
 ]};
 
+ 
+
+
 app.get('/api',(req,res)=>{
 
-    res.json(resources);
+    //res.json(resources);
+const sql = "SELECT * FROM locations"
+let data = {locations:[]}
+
+try{
+DB.all(sql,[],(err,rows)=>{
+  if (err){throw err}
+  rows.forEach(row => {
+    data.locations.push({
+    id:          row.id,
+    name:        row.name,
+    category:    row.category,
+    location:    row.location,
+    description: row.description,
+    phone:       row.phone
+
+    })
+  })
+res.json(data)
+console.log(data)
 })
+
+
+
+}
+catch(err){
+  console.log(err)
+  res.status(467)
+  res.send('{"status": "${err.message}"}')
+}
+
+
+})
+app.post('/api',(req,res)=>{
+
+    //res.json(resources);
+    const sql = "INSERT INTO locations(name , category, location , description ,phone ) VALUES(?,?,?,?,?)"
+    console.log('Test')
+    console.log(req.body)
+
+try{
+DB.run(sql,[req.body.name , req.body.category, req.body.location, req.body.description , req.body.phone],function(err){
+
+ if (err){throw err}
+ res.status(201)
+ let id = {status:201 , message :"New location add with ID of" + this.lastID}
+res.json(id)
+  
+
+})
+
+
+}
+catch(err){
+  console.log(err)
+  res.status(468)
+  res.send(err.message)
+}
+})
+
 
 /*
 app.get("/api",(req,res)=>{
@@ -69,3 +153,5 @@ app.get("/api",(req,res)=>{
 app.listen(8080,()=>{
     console.log("Server Started on port http://localhost:8080/");
 })
+
+
