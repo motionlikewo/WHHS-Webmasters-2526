@@ -12,7 +12,6 @@ const Home = () => {
 
   return (
     <div>
-      {/* Hero Section */}
       <header style={{ backgroundColor: 'var(--sun-yellow)', padding: '60px 0', textAlign: 'center' }}>
         <div className="container">
           <h1 style={{ color: 'var(--sun-blue)', fontSize: '3rem' }}>Connecting Florida Communities</h1>
@@ -23,7 +22,6 @@ const Home = () => {
         </div>
       </header>
 
-      {/* Spotlight Section */}
       <section className="container" style={{ padding: '40px 20px' }}>
         <h2 style={{ color: 'var(--sun-green)', borderBottom: '2px solid var(--sun-green)', paddingBottom: '10px' }}>
           Community Spotlights
@@ -40,7 +38,6 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Additional Content: Mission */}
       <section style={{ backgroundColor: '#e9f5e9', padding: '50px 0' }}>
         <div className="container" style={{ display: 'flex', gap: '40px', flexWrap: 'wrap' }}>
           <div style={{ flex: 1 }}>
