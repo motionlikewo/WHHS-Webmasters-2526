@@ -9,6 +9,8 @@ const MapPage = () => {
   const [apiResults, setApiResults] = useState([]);
   const [selectedPlace, setSelectedPlace] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [mapCenter, setMapCenter] = useState({ lat: 27.9944, lng: -81.7603 });
+  const [isMapMoved, setIsMapMoved] = useState(false);
 
   const categories = ["All", "Shelter", "Food Bank", "Library", "Public Health", "Community Center"];
   const forbiddenWords = ["burger", "king", "mcdonald", "restaurant", "grill", "shop", "boutique", "cafe", "bar", "pizza", "diner", "kia", "auto", "dealership", "store"];
@@ -17,15 +19,17 @@ const MapPage = () => {
     if (searchTerm.trim() === "" && selectedCategory === "All") {
       setApiResults([]);
       setSelectedPlace(null);
+      setIsMapMoved(false);
     }
   }, [searchTerm, selectedCategory]);
 
-  const handleSearch = async (e) => {
+  const handleSearch = async (e, customCenter = null) => {
     if (e) e.preventDefault();
     if (!window.google) return;
 
     setIsLoading(true);
     setSelectedPlace(null);
+    setIsMapMoved(false); 
 
     try {
       const { Place } = await window.google.maps.importLibrary("places");
@@ -35,7 +39,7 @@ const MapPage = () => {
       const request = {
         textQuery: fullQuery,
         fields: ["id", "displayName", "location", "formattedAddress", "rating", "types"],
-        locationBias: { lat: 27.9944, lng: -81.7603 }, 
+        locationBias: customCenter || mapCenter, 
       };
 
       const { places } = await Place.searchByText(request);
@@ -58,8 +62,18 @@ const MapPage = () => {
     }
   };
 
+  const handleSearchThisArea = () => {
+    handleSearch(null, mapCenter);
+  };
+
   const handleSelectPlace = (place) => {
     setSelectedPlace(place);
+    setIsMapMoved(false); // Hide the button when looking at a specific detail
+  };
+
+  const onMapChange = (newCenter) => {
+    setMapCenter(newCenter);
+    setIsMapMoved(true); 
   };
 
   const getDisplayTag = (types) => {
@@ -76,6 +90,7 @@ const MapPage = () => {
         <div className="navButtons">
           <Link to="/"><button className="navBtn">Home</button></Link>
           <Link to="/map"><button className="navBtn activeNav">Map</button></Link>
+          <Link to="/submit"><button className="navBtn">Submit Resources</button></Link>
           <Link to="/about"><button className="navBtn">About</button></Link>
           <Link to="/info"><button className="navBtn">Important Info</button></Link>
           <Link to="/references"><button className="navBtn">References</button></Link>
@@ -120,7 +135,7 @@ const MapPage = () => {
                 
                 <div className="infoSection">
                   <h4>More Information</h4>
-                  <p>View this location directly on Google Maps for more information such as hours, photos, and contact info.</p>
+                  <p>View this location on Google Maps for hours, photos, and contact info.</p>
                   <a 
                     href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedPlace.displayName)}&query_place_id=${selectedPlace.id}`} 
                     target="_blank" 
@@ -152,10 +167,16 @@ const MapPage = () => {
         </aside>
 
         <main className="mapDisplay">
+          {isMapMoved && !isLoading && !selectedPlace && (
+            <button className="searchAreaBtn" onClick={handleSearchThisArea}>
+              Search this area
+            </button>
+          )}
           <GoogleMap 
             apiResults={apiResults} 
             selectedPlace={selectedPlace} 
             onSelectPlace={handleSelectPlace} 
+            onBoundsChange={onMapChange}
           />
         </main>
       </div>

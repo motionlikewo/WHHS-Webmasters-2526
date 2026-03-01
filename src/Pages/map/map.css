@@ -27,6 +27,7 @@ html, body {
   z-index: 100;
 }
 
+/* --- Category Dropdown Design --- */
 .filterGroup {
   display: flex;
   flex-direction: column;
@@ -67,8 +68,8 @@ html, body {
 /* --- Search Bar --- */
 .searchContainer {
   flex: 1;
-  max-width: 400px;
-  margin: 0 1.5rem;
+  max-width: 450px;
+  margin: 0 2rem;
   display: flex;
 }
 
@@ -90,25 +91,16 @@ html, body {
   font-weight: bold;
 }
 
-.navButtons {
-  display: flex;
-  gap: 0.4rem;
-}
-
+/* --- Navigation --- */
+.navButtons { display: flex; gap: 0.5rem; }
 .navBtn {
   background: transparent;
   border: 1px solid #60a5fa;
   color: white;
-  padding: 0.4rem 0.7rem;
+  padding: 0.4rem 0.8rem;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 0.8rem;
-  white-space: nowrap;
-  transition: all 0.2s ease;
-}
-
-.navBtn:hover {
-  background: rgba(96, 165, 250, 0.2);
+  font-size: 0.85rem;
 }
 
 .activeNav {
@@ -118,33 +110,22 @@ html, body {
   font-weight: bold;
 }
 
-.content {
-  display: flex;
-  flex: 1;
-  overflow: hidden;
-}
+.content { display: flex; flex: 1; overflow: hidden; }
 
+/* --- Sidebar & Gold Backdrop --- */
 .sidebar {
   width: 350px;
   background-color: #eab308;
   border-right: 1px solid #d4a017;
-  display: flex;
-  flex-direction: column;
+  display: flex; flex-direction: column;
 }
 
 .sidebarTitle {
-  padding: 1rem;
-  margin: 0;
-  color: #1e3a8a;
-  border-bottom: 1px solid rgba(0,0,0,0.1);
-  font-weight: bold;
+  padding: 1rem; margin: 0;
+  color: #1e3a8a; border-bottom: 1px solid rgba(0,0,0,0.1);
 }
 
-.scroll-area {
-  flex: 1;
-  overflow-y: auto;
-  padding: 1rem;
-}
+.scroll-area { flex: 1; overflow-y: auto; padding: 1rem; }
 
 .resultCard {
   background: #ffffff;
@@ -181,6 +162,35 @@ html, body {
   border-top: 8px solid #22c55e;
 }
 
+/* --- Map Elements --- */
+.mapDisplay {
+  flex: 1;
+  position: relative;
+}
+
+.searchAreaBtn {
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+  background-color: white;
+  color: #1e3a8a;
+  border: 2px solid #eab308;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: all 0.2s;
+}
+
+.searchAreaBtn:hover {
+  background-color: #eab308;
+  color: #1e3a8a;
+}
+
+/* --- Inner Elements --- */
 .detailTitle {
   color: #1e3a8a;
   margin-bottom: 0.5rem;
@@ -192,7 +202,6 @@ html, body {
   padding: 4px 12px;
   border-radius: 20px;
   font-size: 0.8rem;
-  font-weight: bold;
 }
 
 .detailAddress {
@@ -205,12 +214,6 @@ html, body {
 .infoSection h4 {
   color: #1e3a8a;
   margin-bottom: 5px;
-}
-
-.infoSection p {
-  font-size: 0.85rem;
-  color: #374151;
-  margin-bottom: 1rem;
 }
 
 .siteLinkBtn {
@@ -236,11 +239,6 @@ html, body {
   margin-top: 1.5rem;
 }
 
-.mapDisplay {
-  flex: 1;
-  position: relative;
-}
-
 .detailContainer {
   padding: 1rem;
 }
@@ -252,11 +250,4 @@ html, body {
   cursor: pointer;
   font-weight: bold;
   margin-bottom: 1rem;
-}
-
-.loadingText, .emptyText {
-  color: #1e3a8a;
-  font-weight: bold;
-  text-align: center;
-  margin-top: 2rem;
 }
