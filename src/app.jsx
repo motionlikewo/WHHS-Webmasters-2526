@@ -5,6 +5,7 @@ import Footer from './components/footer.jsx';
 import Home from './Pages/main-menu/home.jsx';
 import MapPage from './Pages/map/map.jsx';
 import About from './Pages/about/about.jsx';
+import Info from './Pages/info/info.jsx';
 
 function App() {
   const location = useLocation();
@@ -20,6 +21,7 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/map" element={<MapPage />} />
           <Route path="/about" element={<About />} />
+          <Route path="/info" element={<Info />} />
         </Routes>
       </main>
 
