@@ -1,11 +1,6 @@
 import React from "react";
 
-interface Content_Section_Props {
-    children ?: React.ReactNode;
-    title : string;
-}
-
-function Content_Section({ children,title } : Content_Section_Props){ 
+function Content_Section({ children,title }) {
 const childexists = React.Children.count(children) > 0;
 return<div>
     
