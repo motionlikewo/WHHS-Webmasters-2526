@@ -82,7 +82,7 @@ const GoogleMap = ({ apiResults, selectedPlace, onSelectPlace, onBoundsChange })
     updateMarkers();
   }, [apiResults, selectedPlace, onSelectPlace]);
 
-  return <div ref={mapRef} style={{ width: '100%', height: '100%' }} />;
+  return <div ref={mapRef} style={{ width: '100%', height: '100%', minHeight: '100%' }} />;
 };
 
 export default GoogleMap;

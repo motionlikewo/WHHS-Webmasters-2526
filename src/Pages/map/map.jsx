@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useSearchParams } from 'react-router-dom'; // Added useSearchParams
+import { useSearchParams } from 'react-router-dom';
 import GoogleMap from './googleMap.jsx';
 import './map.css';
 
 const MapPage = () => {
-  const [searchParams] = useSearchParams(); // Hook to read URL parameters
+  const [searchParams] = useSearchParams();
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [apiResults, setApiResults] = useState([]);
@@ -14,210 +14,114 @@ const MapPage = () => {
   const [isMapMoved, setIsMapMoved] = useState(false);
 
   const categories = ["All", "Shelter", "Food Bank", "Library", "Public Health", "Community Center"];
-  const forbiddenWords = ["burger", "king", "mcdonald", "restaurant", "grill", "shop", "boutique", "cafe", "bar", "pizza", "diner", "kia", "auto", "dealership", "store"];
 
-  // Effect to handle "Auto-Select" from Home Page Spotlight
   useEffect(() => {
-    const fetchTargetPlace = async () => {
-      const targetId = searchParams.get('placeId');
-      if (!targetId || !window.google) return;
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
 
-      setIsLoading(true);
-      try {
-        const { Place } = await window.google.maps.importLibrary("places");
-        const place = new Place({ id: targetId });
-        
-        // Fetch details for the spotlighted resource
-        await place.fetchFields({
-          fields: ["id", "displayName", "location", "formattedAddress", "rating", "types"]
-        });
-
-        if (place.location) {
-          setSelectedPlace(place);
-          setMapCenter({ 
-            lat: place.location.lat(), 
-            lng: place.location.lng() 
-          });
-        }
-      } catch (error) {
-        console.error("Failed to fetch spotlighted place:", error);
-      } finally {
-        setIsLoading(false);
-      }
+    return () => { 
+      document.documentElement.style.overflow = 'auto';
+      document.body.style.overflow = 'auto';
     };
-
-    fetchTargetPlace();
-  }, [searchParams]); // Re-runs if the URL placeId changes
-
-  useEffect(() => {
-    if (searchTerm.trim() === "" && selectedCategory === "All") {
-      setApiResults([]);
-      // Only clear selectedPlace if there isn't one from the URL
-      if (!searchParams.get('placeId')) {
-        setSelectedPlace(null);
-      }
-      setIsMapMoved(false);
-    }
-  }, [searchTerm, selectedCategory, searchParams]);
+    
+  }, []);
 
   const handleSearch = async (e, customCenter = null) => {
     if (e) e.preventDefault();
     if (!window.google) return;
-
     setIsLoading(true);
     setSelectedPlace(null);
-    setIsMapMoved(false); 
-
     try {
       const { Place } = await window.google.maps.importLibrary("places");
       const categoryQuery = selectedCategory !== "All" ? selectedCategory : "community resource";
-      const fullQuery = `${searchTerm} ${categoryQuery} Florida`.trim();
-      
       const request = {
-        textQuery: fullQuery,
+        textQuery: `${searchTerm} ${categoryQuery} Florida`.trim(),
         fields: ["id", "displayName", "location", "formattedAddress", "rating", "types"],
-        locationBias: customCenter || mapCenter, 
+        locationBias: customCenter || mapCenter,
       };
-
       const { places } = await Place.searchByText(request);
-
-      if (places && places.length > 0) {
-        const filtered = places.filter(place => {
-          const name = (place.displayName || "").toLowerCase();
-          const types = place.types || [];
-          return !forbiddenWords.some(word => name.includes(word)) && 
-                 !types.some(t => ["restaurant", "food", "car_dealer", "store"].includes(t));
-        });
-        setApiResults(filtered);
-      } else {
-        setApiResults([]);
-      }
+      setApiResults(places || []);
+      setIsMapMoved(false);
     } catch (error) {
-      console.error("Search failed:", error);
+      console.error(error);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const handleSearchThisArea = () => {
-    handleSearch(null, mapCenter);
-  };
-
-  const handleSelectPlace = (place) => {
-    setSelectedPlace(place);
-    setIsMapMoved(false); 
-  };
-
-  const onMapChange = (newCenter) => {
-    setMapCenter(newCenter);
-    setIsMapMoved(true); 
-  };
-
-  const getDisplayTag = (types) => {
-    if (!types || types.length === 0) return "Resource";
-    const importantTypes = ["shelter", "library", "hospital", "school", "park", "church", "community_center"];
-    const found = types.find(t => importantTypes.includes(t));
-    const rawTag = found || types[0];
-    return rawTag.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
-  };
-
   return (
-    <div className="page">
-      <header className="headerContainer">
-        <div className="navButtons">
-          <Link to="/" className="navBtn">Home</Link>
-          <Link to="/map" className="navBtn activeNav">Map</Link>
-          <Link to="/submit" className="navBtn">Submit Resources</Link>
-          <Link to="/about" className="navBtn">About</Link>
-          <Link to="/info" className="navBtn">Important Info</Link>
-          <Link to="/references" className="navBtn">References</Link>
+    <div className="map-page-container">
+      <aside className="map-sidebar">
+        <div className="search-box-container">
+          <form onSubmit={handleSearch}>
+            <div className="search-input-row">
+              <input 
+                className="sidebar-search-input"
+                placeholder="Search..." 
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+              />
+              <select 
+                className="sidebar-category-select"
+                value={selectedCategory} 
+                onChange={(e) => setSelectedCategory(e.target.value)}
+              >
+                {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
+              </select>
+            </div>
+            <button type="submit" className="sidebar-submit-btn">
+              {isLoading ? "Searching..." : "Search Florida"}
+            </button>
+          </form>
         </div>
-        
-        <form className="searchContainer" onSubmit={handleSearch}>
-          <input 
-            type="text" 
-            placeholder="Search Florida resources..." 
-            className="searchInput"
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button type="submit" className="searchBtn">Search</button>
-        </form>
 
-        <div className="filterGroup">
-          <label className="filterLabel">Category</label>
-          <div className="filterWrapper">
-            <select 
-              className="categorySelect" 
-              value={selectedCategory} 
-              onChange={(e) => setSelectedCategory(e.target.value)}
-            >
-              {categories.map(cat => <option key={cat} value={cat}>{cat}</option>)}
-            </select>
-          </div>
-        </div>
-      </header>
-
-      <div className="content">
-        <aside className="sidebar">
+        <div className="sidebar-results-area">
           {selectedPlace ? (
-            <div className="detailContainer">
-              <button className="backBtn" onClick={() => setSelectedPlace(null)}>← Back to Results</button>
-              <div className="detailCard">
-                <h2 className="detailTitle">{selectedPlace.displayName}</h2>
-                <div className="ratingSection">
-                  <span className="starLabel">⭐ {selectedPlace.rating ? `${selectedPlace.rating} / 5` : "No rating"}</span>
-                </div>
-                <p className="detailAddress">📍 {selectedPlace.formattedAddress}</p>
-                
-                <div className="infoSection">
-                  <h4>More Information</h4>
-                  <p>View this location on Google Maps for hours, photos, and contact info.</p>
-                  <a 
-                    href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedPlace.displayName)}&query_place_id=${selectedPlace.id}`} 
-                    target="_blank" 
-                    rel="noreferrer"
-                    className="siteLinkBtn"
-                  >
-                    View on Google Maps
-                  </a>
-                </div>
-
-                <div className="detailTag">
-                  {getDisplayTag(selectedPlace.types)}
-                </div>
+            <div className="place-detail-view">
+              <button className="back-to-results-btn" onClick={() => setSelectedPlace(null)}>← Back</button>
+              <div className="detail-card-inner">
+                <h3>{selectedPlace.displayName}</h3>
+                <p>{selectedPlace.formattedAddress}</p>
+                <a 
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(selectedPlace.displayName)}&query_place_id=${selectedPlace.id}`} 
+                  target="_blank" 
+                  rel="noreferrer" 
+                  className="google-maps-link-btn"
+                >
+                  View on Google Maps
+                </a>
               </div>
             </div>
           ) : (
-            <div className="scroll-area">
-              <h3 className="sidebarTitle">Resource Results ({apiResults.length})</h3>
-              {isLoading ? <p className="loadingText">Searching...</p> : 
-                apiResults.length > 0 ? apiResults.map(item => (
-                  <div key={item.id} className="resultCard" onClick={() => handleSelectPlace(item)}>
-                    <h4 className="resultTitle">{item.displayName}</h4>
-                    <p className="resultAddress">{item.formattedAddress}</p>
-                  </div>
-                )) : <p className="emptyText">Enter a search to find community resources.</p>
-              }
-            </div>
+            <>
+              <p className="results-status-text">Results ({apiResults.length})</p>
+              {apiResults.map(item => (
+                <div key={item.id} className="sidebar-result-card" onClick={() => setSelectedPlace(item)}>
+                  <h4>{item.displayName}</h4>
+                  <p>{item.formattedAddress}</p>
+                </div>
+              ))}
+            </>
           )}
-        </aside>
+        </div>
+      </aside>
 
-        <main className="mapDisplay">
-          {isMapMoved && !isLoading && !selectedPlace && (
-            <button className="searchAreaBtn" onClick={handleSearchThisArea}>
-              Search this area
-            </button>
-          )}
+      <main className="map-main-display">
+        {isMapMoved && !selectedPlace && (
+          <button className="search-here-btn" onClick={() => handleSearch(null, mapCenter)}>
+            Search this area
+          </button>
+        )}
+        <div className="google-map-container">
           <GoogleMap 
             apiResults={apiResults} 
             selectedPlace={selectedPlace} 
-            onSelectPlace={handleSelectPlace} 
-            onBoundsChange={onMapChange}
-            center={mapCenter} // Pass the center so the map moves to the spotlight
+            onSelectPlace={setSelectedPlace} 
+            onBoundsChange={(c) => { setMapCenter(c); setIsMapMoved(true); }}
+            center={mapCenter}
           />
-        </main>
-      </div>
+        </div>
+      </main>
     </div>
   );
 };
