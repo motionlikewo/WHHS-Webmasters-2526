@@ -1,0 +1,11 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; /* Ensures padding doesnt add to width */
+}
+
+html, body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden; /* Stops double scrollbars */
+}
