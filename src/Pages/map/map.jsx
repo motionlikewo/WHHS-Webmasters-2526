@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom'; // Added useSearchParams
 import GoogleMap from './googleMap.jsx';
 import './map.css';
 
 const MapPage = () => {
+  const [searchParams] = useSearchParams(); // Hook to read URL parameters
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [apiResults, setApiResults] = useState([]);
@@ -15,13 +16,49 @@ const MapPage = () => {
   const categories = ["All", "Shelter", "Food Bank", "Library", "Public Health", "Community Center"];
   const forbiddenWords = ["burger", "king", "mcdonald", "restaurant", "grill", "shop", "boutique", "cafe", "bar", "pizza", "diner", "kia", "auto", "dealership", "store"];
 
+  // Effect to handle "Auto-Select" from Home Page Spotlight
+  useEffect(() => {
+    const fetchTargetPlace = async () => {
+      const targetId = searchParams.get('placeId');
+      if (!targetId || !window.google) return;
+
+      setIsLoading(true);
+      try {
+        const { Place } = await window.google.maps.importLibrary("places");
+        const place = new Place({ id: targetId });
+        
+        // Fetch details for the spotlighted resource
+        await place.fetchFields({
+          fields: ["id", "displayName", "location", "formattedAddress", "rating", "types"]
+        });
+
+        if (place.location) {
+          setSelectedPlace(place);
+          setMapCenter({ 
+            lat: place.location.lat(), 
+            lng: place.location.lng() 
+          });
+        }
+      } catch (error) {
+        console.error("Failed to fetch spotlighted place:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchTargetPlace();
+  }, [searchParams]); // Re-runs if the URL placeId changes
+
   useEffect(() => {
     if (searchTerm.trim() === "" && selectedCategory === "All") {
       setApiResults([]);
-      setSelectedPlace(null);
+      // Only clear selectedPlace if there isn't one from the URL
+      if (!searchParams.get('placeId')) {
+        setSelectedPlace(null);
+      }
       setIsMapMoved(false);
     }
-  }, [searchTerm, selectedCategory]);
+  }, [searchTerm, selectedCategory, searchParams]);
 
   const handleSearch = async (e, customCenter = null) => {
     if (e) e.preventDefault();
@@ -68,7 +105,7 @@ const MapPage = () => {
 
   const handleSelectPlace = (place) => {
     setSelectedPlace(place);
-    setIsMapMoved(false); // Hide the button when looking at a specific detail
+    setIsMapMoved(false); 
   };
 
   const onMapChange = (newCenter) => {
@@ -88,12 +125,12 @@ const MapPage = () => {
     <div className="page">
       <header className="headerContainer">
         <div className="navButtons">
-          <Link to="/"><button className="navBtn">Home</button></Link>
-          <Link to="/map"><button className="navBtn activeNav">Map</button></Link>
-          <Link to="/submit"><button className="navBtn">Submit Resources</button></Link>
-          <Link to="/about"><button className="navBtn">About</button></Link>
-          <Link to="/info"><button className="navBtn">Important Info</button></Link>
-          <Link to="/references"><button className="navBtn">References</button></Link>
+          <Link to="/" className="navBtn">Home</Link>
+          <Link to="/map" className="navBtn activeNav">Map</Link>
+          <Link to="/submit" className="navBtn">Submit Resources</Link>
+          <Link to="/about" className="navBtn">About</Link>
+          <Link to="/info" className="navBtn">Important Info</Link>
+          <Link to="/references" className="navBtn">References</Link>
         </div>
         
         <form className="searchContainer" onSubmit={handleSearch}>
@@ -177,6 +214,7 @@ const MapPage = () => {
             selectedPlace={selectedPlace} 
             onSelectPlace={handleSelectPlace} 
             onBoundsChange={onMapChange}
+            center={mapCenter} // Pass the center so the map moves to the spotlight
           />
         </main>
       </div>

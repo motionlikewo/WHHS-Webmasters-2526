@@ -92,21 +92,34 @@ html, body {
 }
 
 /* --- Navigation --- */
-.navButtons { display: flex; gap: 0.5rem; }
+.navButtons { 
+  display: flex; 
+  gap: 0.5rem; 
+}
+
 .navBtn {
   background: transparent;
   border: 1px solid #60a5fa;
-  color: white;
+  color: white !important;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
   cursor: pointer;
   font-size: 0.85rem;
+  text-decoration: none !important;
+  display: inline-block;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
 
+.navBtn:hover {
+  background-color: rgba(96, 165, 250, 0.2);
+}
+
+/* Active State */
 .activeNav {
-  background: #eab308;
-  color: #1e3a8a;
-  border-color: #eab308;
+  background: #eab308 !important;
+  color: #1e3a8a !important;
+  border-color: #eab308 !important;
   font-weight: bold;
 }
 
