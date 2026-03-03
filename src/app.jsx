@@ -7,6 +7,7 @@ import Home from './Pages/main-menu/home.jsx';
 import MapPage from './Pages/map/map.jsx';
 import About from './Pages/about/about.jsx';
 import Info from './Pages/info/info.jsx';
+import SubmitPage from './Pages/submit/submit.jsx';
 
 function App() {
   const location = useLocation();
