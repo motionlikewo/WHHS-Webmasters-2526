@@ -1,0 +1,108 @@
+.references-page {
+  height: 580px;
+  background-color: var(--yellow);
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.references-container {
+  width: 100%;
+  max-width: 800px;
+}
+
+.references-heading {
+  text-align: center;
+  color: #1e3a8a;
+  font-size: 2.5rem;
+  margin-bottom: 40px;
+  font-weight: bold;
+}
+
+.accordion-group {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.reference-box {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  border: 1px solid #ddd;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.box-header {
+  padding: 20px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  color: #1e3a8a;
+  cursor: pointer;
+  background-color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  user-select: none;
+}
+
+.box-header:hover {
+  background-color: #f8f9fa;
+}
+
+.box-header::after {
+  content: '▶';
+  font-size: 0.8rem;
+  transition: transform 0.3s ease;
+  color: var(--green);
+}
+
+.reference-box.is-open .box-header::after {
+  transform: rotate(90deg);
+}
+
+.box-content-wrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease-in-out;
+}
+
+.reference-box.is-open .box-content-wrapper {
+  max-height: 500px;
+}
+
+.box-content {
+  padding: 20px;
+  border-top: 1px solid #eee;
+  background-color: #fff;
+  line-height: 1.6;
+}
+
+.links-list {
+  padding-left: 20px;
+}
+
+.links-list li {
+  margin-bottom: 10px;
+}
+
+.links-list a, .pdf-link {
+  color: #0077C8;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.links-list a:hover, .pdf-link:hover {
+  text-decoration: underline;
+}
+
+.pdf-link {
+  display: inline-block;
+  margin-top: 10px;
+  padding: 10px 15px;
+  background-color: #f1f5f9;
+  border-radius: 6px;
+  border: 1px solid #cbd5e1;
+}

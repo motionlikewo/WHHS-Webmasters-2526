@@ -3,7 +3,7 @@
 }
 
 .navbar {
-  background-color: var(--sun-blue);
+  background-color: var(--blue);
   padding: 0.8rem 0; 
   width: 100%;
   display: block;
@@ -36,7 +36,7 @@
 .logo-text {
   font-size: 2rem; 
   font-weight: bold;
-  color: var(--sun-yellow);
+  color: var(--yellow);
   white-space: nowrap; 
 }
 
@@ -64,8 +64,8 @@
 }
 
 .nav-link.active {
-  background-color: var(--sun-yellow);
-  color: var(--sun-blue);
-  border-color: var(--sun-yellow);
+  background-color: var(--yellow);
+  color: var(--blue);
+  border-color: var(--yellow);
   font-weight: bold;
 }

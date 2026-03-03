@@ -8,6 +8,7 @@ import MapPage from './Pages/map/map.jsx';
 import About from './Pages/about/about.jsx';
 import Info from './Pages/info/info.jsx';
 import SubmitPage from './Pages/submit/submit.jsx';
+import References from './Pages/references/references.jsx';
 
 function App() {
   const location = useLocation();
@@ -24,6 +25,7 @@ function App() {
           <Route path="/submit" element={<SubmitPage />} />
           <Route path="/about" element={<About />} />
           <Route path="/info" element={<Info />} />  
+          <Route path="/references" element={<References />} />
         </Routes>
       </main>
 

@@ -1,7 +1,7 @@
 :root {
-  --sun-blue: #0077C8;
-  --sun-yellow: #FFD700;
-  --sun-green: #2E8B57;
+  --blue: #0077C8;
+  --yellow: #FFD700;
+  --green: #2E8B57;
   --light-bg: #F0F8FF;
   --dark-text: #333;
 }
@@ -10,7 +10,6 @@ html, body, #root {
   height: 100%;
   margin: 0;
   padding: 0;
-  /* CHANGE: Remove overflow: hidden from here */
   overflow-y: auto; 
 }
 

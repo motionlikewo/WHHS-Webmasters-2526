@@ -4,13 +4,13 @@
 }
 
 .home-hero {
-  background-color: var(--sun-yellow);
+  background-color: var(--yellow);
   padding: 60px 0;
   text-align: center;
 }
 
 .home-hero h1 {
-  color: var(--sun-blue);
+  color: var(--blue);
   font-size: 3rem;
   margin: 0;
 }
@@ -23,20 +23,20 @@
 
 .btn-primary{
   display: inline-block;
-  background-color: #16a34a !important;
+  background-color: var(--green) !important;
   color: rgb(255, 255, 255);
   padding: 0.6rem 1.2rem;
   border-radius: 6px;
   text-decoration: none;
   font-weight: bold;
-  border: 1px solid #60a5fa;
+  border: 1px solid #6afd76;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .nav-btn {
     display: inline-block;
-  background-color: #0055ff;
+  background-color: var(--blue);
   color: rgb(255, 255, 255);
   padding: 0.6rem 1.2rem;
   border-radius: 6px;
@@ -48,7 +48,7 @@
 }
 
 .btn-primary:hover {
-  background-color: #0055ff !important;
+  background-color: var(--blue) !important;
   transform: translateY(-1px);
 }
 
@@ -57,8 +57,8 @@
 }
 
 .spotlight-title {
-  color: var(--sun-green);
-  border-bottom: 2px solid var(--sun-green);
+  color: var(--green);
+  border-bottom: 2px solid var(--green);
   padding-bottom: 10px;
 }
 
@@ -78,8 +78,8 @@
 }
 
 .category-tag {
-  background-color: var(--sun-yellow);
-  color: var(--sun-blue);
+  background-color: var(--yellow);
+  color: var(--blue);
   padding: 2px 8px;
   border-radius: 4px;
   font-size: 0.8rem;
@@ -89,7 +89,7 @@
 }
 
 .view-details-link {
-  color: var(--sun-green);
+  color: var(--green);
   font-weight: bold;
   text-decoration: none;
 }
@@ -113,7 +113,7 @@
 .mission-card-cta {
   flex: 1;
   min-width: 300px;
-  background-color: var(--sun-blue);
+  background-color: var(--blue);
   color: white;
   padding: 30px;
   border-radius: 10px;
@@ -124,7 +124,7 @@
 }
 
 .submission-link {
-  color: var(--sun-yellow);
+  color: var(--yellow);
   font-weight: bold;
   text-decoration: none;
 }
@@ -141,7 +141,7 @@
 }
 
 .spotlight-card h3 {
-  color: var(--sun-blue);
+  color: var(--blue);
   margin: 10px 0 5px 0;
   font-size: 1.2rem;
   min-height: 2.8rem;
