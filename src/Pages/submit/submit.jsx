@@ -26,15 +26,6 @@ const SubmitPage = () => {
 
   return (
     <div className="wrapper">
-      <header className="headerContainer">
-        <div className="navButtons">
-          <Link to="/"><button className="navBtn">Home</button></Link>
-          <Link to="/map"><button className="navBtn">Map</button></Link>
-        </div>
-        <div className="headerTitle">
-          <h1>Suggest a Resource</h1>
-        </div>
-      </header>
 
       <main className="main">
         {!isSubmitted ? (
