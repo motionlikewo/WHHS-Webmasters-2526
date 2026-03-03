@@ -10,7 +10,7 @@ if(err){
 }
 console.log("Database connected")
 }
-let sql = 'CREATE TABLE IF NOT EXISTS submissions(id INTEGER PRIMARY KEY, name TEXT NOT NULL, category TEXT NOT NULL, address TEXT NOT NULL, description TEXT NOT NULL,phone TEXT NOT NULL ,hours TEXT NOT NULL) ';
+let sql = 'submissions(id INTEGER PRIMARY KEY, name TEXT NOT NULL, category TEXT NOT NULL, address TEXT NOT NULL, description TEXT NOT NULL,phone TEXT NOT NULL ,hours TEXT NOT NULL) ';
 
 DB.run(sql,[],(err)=>{ 
     if(err){
@@ -96,7 +96,7 @@ DB.all(sql,[],(err,rows)=>{
     id:          row.id,
     name:        row.name,
     category:    row.category,
-    location:    row.location,
+    address:     row.address,
     description: row.description,
     phone:       row.phone
 
