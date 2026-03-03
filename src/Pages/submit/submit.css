@@ -1,0 +1,135 @@
+/* submit.css */
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Takes full viewport height */
+  overflow: hidden; /* Prevents page-level scrolling */
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f0f2f5;
+  padding: 1rem;
+}
+
+.card {
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+  width: 100%;
+  max-width: 600px;
+  border-top: 6px solid #facc15; /* Yellow Accent */
+}
+
+.header {
+  margin-bottom: 1.5rem;
+}
+
+.header-h2 {
+  color: #1e3a8a; /* Blue */
+  margin: 0;
+}
+
+.header-p {
+  color: #64748b;
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+.resourceForm {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formRow {
+  display: flex;
+  gap: 1rem;
+}
+
+.formRow.formGroup {
+  flex: 1;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.formGroup-label {
+  font-weight: 600;
+  color: #334155;
+  font-size: 0.85rem;
+}
+
+.req {
+  color: #ef4444; /* Red for required star */
+}
+
+.formGroup-input, 
+.formGroup-select, 
+.formGroup-textarea {
+  padding: 0.6rem;
+  border: 1px solid #cbd5e1;
+  border-radius: 6px;
+  font-size: 0.95rem;
+}
+
+.formGroup-input:focus {
+  outline: 2px solid #3b82f6;
+  border-color: transparent;
+}
+
+.action-btn {
+  background-color: #22c55e; /* Green */
+  color: white;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 0.5rem;
+}
+
+.action-btn:hover {
+  background-color: #15803d;
+}
+
+.confirmationCard {
+  background: white;
+  padding: 3rem;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  border-bottom: 6px solid #22c55e;
+  max-width: 450px;
+}
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  margin-top: 2rem;
+}
+
+.successIcon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.reset-btn {
+  margin-top: 1.5rem;
+  background: #1e3a8a;
+  color: white;
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 4px;
+  cursor: pointer;
+}

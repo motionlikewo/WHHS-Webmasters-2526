@@ -15,8 +15,7 @@ function App() {
   return (
     <div className="app-wrapper" style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
       <Navbar /> 
-      
-      {/* The 'flex: 1' here is vital for the Map height calculation */}
+
       <main style={{ flex: 1, display: 'flex', flexDirection: 'column', position: 'relative' }}>
         <Routes>
           <Route path="/" element={<Home />} />
