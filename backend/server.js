@@ -10,7 +10,8 @@ if(err){
 }
 console.log("Database connected")
 }
-let sql = 'CREATE TABLE IF NOT EXISTS locations(id INTEGER PRIMARY KEY, name TEXT NOT NULL, category TEXT NOT NULL, location TEXT NOT NULL, description TEXT NOT NULL,phone TEXT NOT NULL ) ';
+let sql = 'CREATE TABLE IF NOT EXISTS submissions(id INTEGER PRIMARY KEY, name TEXT NOT NULL, category TEXT NOT NULL, address TEXT NOT NULL, description TEXT NOT NULL,phone TEXT NOT NULL ,hours TEXT NOT NULL) ';
+
 DB.run(sql,[],(err)=>{ 
     if(err){
         console.log("Error making table")
@@ -81,7 +82,7 @@ app.use(express.json());
  
 
 
-app.get('/api',(req,res)=>{
+app.get('/api/locations',(req,res)=>{
 
     //res.json(resources);
 const sql = "SELECT * FROM locations"
@@ -116,15 +117,15 @@ catch(err){
 
 
 })
-app.post('/api',(req,res)=>{
+app.post('/api/submit',(req,res)=>{
 
     //res.json(resources);
-    const sql = "INSERT INTO locations(name , category, location , description ,phone ) VALUES(?,?,?,?,?)"
+    const sql = "INSERT INTO submissions(name , category, address , description ,phone , hours ) VALUES(?,?,?,?,?,?)"
     console.log('Test')
     console.log(req.body)
 
 try{
-DB.run(sql,[req.body.name , req.body.category, req.body.location, req.body.description , req.body.phone],function(err){
+DB.run(sql,[req.body.name , req.body.category, req.body.address, req.body.description , req.body.phone, req.body.hours],function(err){
 
  if (err){throw err}
  res.status(201)
@@ -144,6 +145,8 @@ catch(err){
 })
 
 
+
+
 /*
 app.get("/api",(req,res)=>{
 
@@ -153,5 +156,4 @@ app.get("/api",(req,res)=>{
 app.listen(8080,()=>{
     console.log("Server Started on port http://localhost:8080/");
 })
-
 
