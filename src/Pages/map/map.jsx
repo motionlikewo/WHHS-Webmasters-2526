@@ -4,7 +4,7 @@ import GoogleMap from './googleMap.jsx';
 import './map.css';
 
 const MapPage = () => {
-  const [searchParams] = useSearchParams();
+  const [searchParams] = useSearchParams(); // This reads the ?placeId= from the URL
   const [searchTerm, setSearchTerm] = useState("");
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [apiResults, setApiResults] = useState([]);
@@ -15,16 +15,50 @@ const MapPage = () => {
 
   const categories = ["All", "Shelter", "Food Bank", "Library", "Public Health", "Community Center"];
 
+  //Scroll lock
   useEffect(() => {
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
-
     return () => { 
       document.documentElement.style.overflow = 'auto';
       document.body.style.overflow = 'auto';
     };
-    
   }, []);
+
+  //Handles view on map when clicking on spotlight cards from the Home page
+  useEffect(() => {
+    const fetchSpecificPlace = async () => {
+      const pId = searchParams.get('placeId');
+      if (!pId || !window.google) return;
+
+      try {
+        const { Place } = await window.google.maps.importLibrary("places");
+        const place = new Place({ id: pId });
+        
+        await place.fetchFields({ fields: ["displayName", "formattedAddress", "location", "id"] });
+
+        if (place.location) {
+          const coords = { lat: place.location.lat(), lng: place.location.lng() };
+          setMapCenter(coords);
+          setSelectedPlace(place);
+          setApiResults([place]);
+        }
+      } catch (err) {
+        console.error("Error jumping to place:", err);
+      }
+    };
+
+    const timer = setTimeout(fetchSpecificPlace, 500);
+    return () => clearTimeout(timer);
+  }, [searchParams]);
+
+  useEffect(() => {
+    if (searchTerm.trim() === "") {
+      setApiResults([]);
+      setSelectedPlace(null);
+      setIsMapMoved(false);
+    }
+  }, [searchTerm]);
 
   const handleSearch = async (e, customCenter = null) => {
     if (e) e.preventDefault();
