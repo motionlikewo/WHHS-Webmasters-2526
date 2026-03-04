@@ -43,6 +43,12 @@ const ReferencesPage = () => {
               developers.google.com/maps/documentation/places/web-service
             </a>
           </li>
+          <li>
+            <span>Vercel: </span>
+            <a href="https://vercel.com/docs" target="_blank" rel="noreferrer">
+              vercel.com/docs
+            </a>
+          </li>
         </ul>
       )
     },
