@@ -12,45 +12,65 @@ const ReferencesPage = () => {
     {
       title: "Sources of Information",
       content: (
-        <ul className="links-list">
-          <li>
-            <span>Florida Outline with Flag: </span>
-            <a href="https://pixabay.com/vectors/florida-flag-map-usa-america-890553/" target="_blank" rel="noreferrer">
-              pixabay.com/vectors/florida-flag-map-usa-america-890553/
+        <div className="sources-list">
+          <h3>Image Sources</h3>
+          <div className="source-item">
+            <a href="https://pixabay.com/users/sasint-3639875/" target="_blank" rel="noreferrer">
+              Person helping another climb a mountain. Image by sasint - Pixabay
             </a>
-          </li>
-          <li>
-            <span>Sun: </span>
-            <a href="https://www.vecteezy.com/free-png/sun-free-png" target="_blank" rel="noreferrer">
-              www.vecteezy.com/free-png/sun-free-png
+          </div>  
+
+          <div className="source-item">
+            <a href="https://pixabay.com/users/rickbella-11598335/" target="_blank" rel="noreferrer">
+              Community full of modern houses. Image by rickbella - Pixabay
             </a>
-          </li>
-          <li>
-            <span>Florida Seal: </span>
-            <a href="https://pixabay.com/vectors/seal-state-florida-usa-tree-palm-40650/" target="_blank" rel="noreferrer">
-              pixabay.com/vectors/seal-state-florida-usa-tree-palm-40650/
+          </div>
+
+          <div className="source-item">
+            <a href="https://pixabay.com/users/pexels-2286921/" target="_blank" rel="noreferrer">
+              Computer screen with code on it. Image by Pexels - Pixabay
             </a>
-          </li>
-          <li>
-            <span>Google Maps JavaScript API: </span>
+          </div>
+          
+          <h3>Icon Sources</h3>
+          <div className="source-item">
+            <a href="https://pixabay.com/users/kjrstie-547995/" target="_blank" rel="noreferrer">
+              Florida Outline with Flag. Image by kjrstie - Pixabay
+            </a>
+          </div>
+
+          <div className="source-item">
+            <a href="https://www.vecteezy.com/members/kinggod" target="_blank" rel="noreferrer">
+              Sun drawing. Image by King God. - Vecteezy
+            </a>
+          </div>
+      
+          <div className="source-item">
+            <a href="https://pixabay.com/users/clker-free-vector-images-3736/" target="_blank" rel="noreferrer">
+              Florida Seal. Image by Clker-Free-Vector-Images - Pixabay
+            </a>
+          </div>
+
+          <h3>Code Sources</h3>
+          <div className="source-item">
             <a href="https://developers.google.com/maps/documentation/javascript" target="_blank" rel="noreferrer">
-              developers.google.com/maps/documentation/javascript
+              Google Maps JavaScript API. - Google
             </a>
-          </li>
-          <li>
-            <span>Google Maps Places API (New): </span>
+          </div>
+
+          <div className="source-item">
             <a href="https://developers.google.com/maps/documentation/places/web-service" target="_blank" rel="noreferrer">
-              developers.google.com/maps/documentation/places/web-service
+              Google Maps Places API (New). - Google
             </a>
-          </li>
-          <li>
-            <span>Vercel: </span>
+          </div>
+
+          <div className="source-item">
             <a href="https://vercel.com/docs" target="_blank" rel="noreferrer">
-              vercel.com/docs
+              Vercel Hosting, Web, and Speed Analytics. - Vercel
             </a>
-          </li>
-        </ul>
-      )
+          </div>
+        </div>
+  )
     },
 
     {
