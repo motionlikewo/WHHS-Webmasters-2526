@@ -70,16 +70,30 @@
   font-weight: bold;
 }
 
-@media (max-width: 600px) {
-  .navbar-container {
+@media (max-width: 768px) {
+  .container {
     flex-direction: column;
-    padding: 10px;
+    padding: 15px;
+    gap: 15px;
+    align-items: center;
+    width: 100% !important;
   }
 
-  .nav-links {
-    flex-direction: column;
-    gap: 10px;
+  .logo-text {
+    font-size: 22px;
+  }
+
+  .links {
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 8px;
     width: 100%;
+  }
+
+  .nav-link {
+    font-size: 0.8rem;
+    padding: 0.5rem 1rem;
+    flex-grow: 1;
     text-align: center;
   }
 }
