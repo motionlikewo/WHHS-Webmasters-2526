@@ -1,14 +1,16 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import './footer.css';
+import logo from '../assets/sunshineCentralLogo.png';
 
 const Footer = () => {
   return (
-    <footer style={{ backgroundColor: '#333', color: 'white', padding: '20px 0', marginTop: 'auto' }}>
-      <div className="container" style={{ textAlign: 'center' }}>
-        <p>&copy;Sunshine Central Community Hub</p>
-        <p style={{ fontSize: '0.8rem', color: '#aaa' }}>
-          Created for the 2026 FLTSA Conference. 
-          <br/>This website is a student project.
-        </p>
+    <footer className="site-footer">
+      <div className="footer-container">
+        <Link to="/" className="footer-content">
+          <img src={logo} alt="Sunshine Central Logo" className="footer-logo" />
+          <span className="footer-site-name">Sunshine Central</span>
+        </Link>
       </div>
     </footer>
   );
