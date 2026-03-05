@@ -3,6 +3,8 @@ const sql3 = sqlite
 
 const DB = new sql3.Database("./mydata.db",sqlite.OPEN_READWRITE,connected)
 
+
+
 function connected(err){
 if(err){
     console.log(err.message)
@@ -24,6 +26,10 @@ DB.run(sql,[],(err)=>{
 const express = require("express");
 const app = express(); 
 app.use(express.json());
+
+//link to frontend
+const cors = require("cors");
+app.use(cors());
 
 
 
