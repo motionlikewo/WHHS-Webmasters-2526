@@ -69,3 +69,17 @@
   border-color: var(--yellow);
   font-weight: bold;
 }
+
+@media (max-width: 600px) {
+  .navbar-container {
+    flex-direction: column;
+    padding: 10px;
+  }
+
+  .nav-links {
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    text-align: center;
+  }
+}
