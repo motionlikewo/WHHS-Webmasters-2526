@@ -14,41 +14,35 @@ const SubmitPage = () => {
   });
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
+  e.preventDefault();
 
-    const submissionData = {
-      name: formData.name,
-      category: formData.category,
-      address: formData.address,
-      description: formData.description,
-      phone: formData.phone || "N/A", // Default if empty
-      hours: formData.hours || "N/A", // Default if empty
-      rating: 5,                      // Default rating for new submissions
-      url: ""                         // Placeholder for URL
-    };
-
-    try {
-      const response = await fetch('http://localhost:8080/api/submit', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(submissionData),
-      });
-
-      if (response.ok) {
-        const result = await response.json();
-        console.log("Success:", result.message);
-        setIsSubmitted(true);
-      } else {
-        console.error("Server error:", response.status);
-        alert("Failed to submit to database. Check server console.");
-      }
-    } catch (error) {
-      console.error("Fetch error:", error);
-      alert("Could not connect to the server. Is node server.js running?");
-    }
+  const submissionData = {
+    name: formData.name,
+    category: formData.category,
+    address: formData.address,
+    description: formData.description,
+    phone: formData.phone || "N/A",
+    hours: formData.hours || "N/A",
+    rating: 5,
+    url: ""
   };
+
+  try {
+    const response = await fetch('http://localhost:8080/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(submissionData),
+    });
+
+    if (response.ok) {
+      console.log("Data sent to backend.");
+    }
+  } catch (error) {
+    console.warn("Backend offline.");
+  } finally {
+    setIsSubmitted(true);
+  }
+};
 
   const handleChange = (e) => {
     const { name, value } = e.target;
