@@ -10,17 +10,18 @@ if(err){
 }
 console.log("Database connected")
 }
-let sql = 'submissions(id INTEGER PRIMARY KEY, name TEXT NOT NULL, category TEXT NOT NULL, address TEXT NOT NULL, description TEXT NOT NULL,phone TEXT NOT NULL ,hours TEXT NOT NULL) ';
 
+/*
+let sql = ''
 DB.run(sql,[],(err)=>{ 
     if(err){
-        console.log("Error making table")
+        console.log("Error adding url ")
         console.log(err.message)
          
         } 
     console.log("Table Created")})
 
-
+*/
 
 const express = require("express");
 const app = express(); 
@@ -91,6 +92,7 @@ let data = {locations:[]}
 try{
 DB.all(sql,[],(err,rows)=>{
   if (err){throw err}
+  console.log(rows)
   rows.forEach(row => {
     data.locations.push({
     id:          row.id,
@@ -98,7 +100,9 @@ DB.all(sql,[],(err,rows)=>{
     category:    row.category,
     address:     row.address,
     description: row.description,
-    phone:       row.phone
+    phone:       row.phone,
+    rating:      row.rating,
+    url:         row.url
 
     })
   })
@@ -120,12 +124,12 @@ catch(err){
 app.post('/api/submit',(req,res)=>{
 
     //res.json(resources);
-    const sql = "INSERT INTO submissions(name , category, address , description ,phone , hours ) VALUES(?,?,?,?,?,?)"
+    const sql = "INSERT INTO submissions(name , category, address , description ,phone , hours, rating, url ) VALUES(?,?,?,?,?,?,?,?)"
     console.log('Test')
     console.log(req.body)
 
 try{
-DB.run(sql,[req.body.name , req.body.category, req.body.address, req.body.description , req.body.phone, req.body.hours],function(err){
+DB.run(sql,[req.body.name , req.body.category, req.body.address, req.body.description , req.body.phone, req.body.hours,req.body.rating,req.body.url],function(err){
 
  if (err){throw err}
  res.status(201)
@@ -156,4 +160,8 @@ app.get("/api",(req,res)=>{
 app.listen(8080,()=>{
     console.log("Server Started on port http://localhost:8080/");
 })
+const res = fetch("http://localhost:8080/api/locations", {
+  method: "GET"
+  })
+  console.log(res)
 

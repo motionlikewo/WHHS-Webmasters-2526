@@ -17,11 +17,12 @@ const res = fetch("http://localhost:8080/api/locations", {
   res.locations[i].address
   res.locations[i].description
   res.locations[i].phone
-
+  res.locations[i].rating
+  res.locations[i].url
 
 Sumbitting submissions
 
- const data = {name:"Test" ,category :"test" , address:"test" , description:"test"  , phone:"test", hours:'test'}
+ const data = {name:"Test" ,category :"test" , address:"test" , description:"test"  , phone:"test", hours:'test',rating:'test/test' , url: "https:test.test"}
 
 const res =  fetch("http://localhost:8080/api/submit", {
   method: "POST",
