@@ -29,11 +29,11 @@ const AboutPage = () => {
           <div className="about-text">
             <h2>Rooted in Community</h2>
             <p>
-              Founded from memebers who grew up in the Sunshine State, we realized that while thousands of 
+              Founded from members who grew up in the Sunshine State, we realized that while thousands of 
               non-profits and government programs exist, finding them in a moment of 
               crisis can be challenging. Sunshine Central aids the Florida community in this journey 
               by centralizing verified data into an accessible map interface 
-              designed for it's users.
+              designed for its users.
             </p>
           </div>
           <div className="about-image">

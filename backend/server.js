@@ -3,6 +3,8 @@ const sql3 = sqlite
 
 const DB = new sql3.Database("./mydata.db",sqlite.OPEN_READWRITE,connected)
 
+
+
 function connected(err){
 if(err){
     console.log(err.message)
@@ -10,20 +12,26 @@ if(err){
 }
 console.log("Database connected")
 }
-let sql = 'CREATE TABLE IF NOT EXISTS locations(id INTEGER PRIMARY KEY, name TEXT NOT NULL, category TEXT NOT NULL, location TEXT NOT NULL, description TEXT NOT NULL,phone TEXT NOT NULL ) ';
+
+/*
+let sql = ''
 DB.run(sql,[],(err)=>{ 
     if(err){
-        console.log("Error making table")
+        console.log("Error adding url ")
         console.log(err.message)
          
         } 
     console.log("Table Created")})
 
-
+*/
 
 const express = require("express");
 const app = express(); 
 app.use(express.json());
+
+//link to frontend
+const cors = require("cors");
+app.use(cors());
 
 
 
@@ -81,7 +89,7 @@ app.use(express.json());
  
 
 
-app.get('/api',(req,res)=>{
+app.get('/api/locations',(req,res)=>{
 
     //res.json(resources);
 const sql = "SELECT * FROM locations"
@@ -90,14 +98,17 @@ let data = {locations:[]}
 try{
 DB.all(sql,[],(err,rows)=>{
   if (err){throw err}
+  console.log(rows)
   rows.forEach(row => {
     data.locations.push({
     id:          row.id,
     name:        row.name,
     category:    row.category,
-    location:    row.location,
+    address:     row.address,
     description: row.description,
-    phone:       row.phone
+    phone:       row.phone,
+    rating:      row.rating,
+    url:         row.url
 
     })
   })
@@ -116,15 +127,15 @@ catch(err){
 
 
 })
-app.post('/api',(req,res)=>{
+app.post('/api/submit',(req,res)=>{
 
     //res.json(resources);
-    const sql = "INSERT INTO locations(name , category, location , description ,phone ) VALUES(?,?,?,?,?)"
+    const sql = "INSERT INTO submissions(name , category, address , description ,phone , hours, rating, url ) VALUES(?,?,?,?,?,?,?,?)"
     console.log('Test')
     console.log(req.body)
 
 try{
-DB.run(sql,[req.body.name , req.body.category, req.body.location, req.body.description , req.body.phone],function(err){
+DB.run(sql,[req.body.name , req.body.category, req.body.address, req.body.description , req.body.phone, req.body.hours,req.body.rating,req.body.url],function(err){
 
  if (err){throw err}
  res.status(201)
@@ -144,6 +155,8 @@ catch(err){
 })
 
 
+
+
 /*
 app.get("/api",(req,res)=>{
 
@@ -154,4 +167,10 @@ app.listen(8080,()=>{
     console.log("Server Started on port http://localhost:8080/");
 })
 
+/*
+const res = fetch("http://localhost:8080/api/locations", {
+  method: "GET"
+  })
+  console.log(res)
+*/
 
