@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import './references.css';
+import copyright from '../../assets/checklist.pdf';
+import log from '../../assets/worklog.pdf';
 
 const ReferencesPage = () => {
   const [openIndex, setOpenIndex] = useState(null);
@@ -78,7 +80,7 @@ const ReferencesPage = () => {
       content: (
         <>
           <p>Click the link below to view the completed Copyright Checklist PDF:</p>
-          <a href="/assets/copyrightchecklist.pdf" className="pdf-link" target="_blank" rel="noreferrer">
+          <a href={copyright} className="pdf-link" target="_blank" rel="noreferrer">
             📄 View Copyright Checklist (PDF)
           </a>
         </>
@@ -90,7 +92,7 @@ const ReferencesPage = () => {
       content: (
         <>
           <p>Click the link below to view the detailed Plan of Work Log PDF:</p>
-          <a href="/assets/worklog.pdf" className="pdf-link" target="_blank" rel="noreferrer">
+          <a href={log} className="pdf-link" target="_blank" rel="noreferrer">
             📄 View Work Log (PDF)
           </a>
         </>

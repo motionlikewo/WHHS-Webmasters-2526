@@ -3,8 +3,6 @@ const sql3 = sqlite
 
 const DB = new sql3.Database("./mydata.db",sqlite.OPEN_READWRITE,connected)
 
-
-
 function connected(err){
 if(err){
     console.log(err.message)
@@ -12,8 +10,7 @@ if(err){
 }
 console.log("Database connected")
 }
-let sql = 'submissions(id INTEGER PRIMARY KEY, name TEXT NOT NULL, category TEXT NOT NULL, address TEXT NOT NULL, description TEXT NOT NULL,phone TEXT NOT NULL ,hours TEXT NOT NULL) ';
-
+let sql = 'CREATE TABLE IF NOT EXISTS locations(id INTEGER PRIMARY KEY, name TEXT NOT NULL, category TEXT NOT NULL, location TEXT NOT NULL, description TEXT NOT NULL,phone TEXT NOT NULL ) ';
 DB.run(sql,[],(err)=>{ 
     if(err){
         console.log("Error making table")
@@ -27,10 +24,6 @@ DB.run(sql,[],(err)=>{
 const express = require("express");
 const app = express(); 
 app.use(express.json());
-
-//link to frontend
-const cors = require("cors");
-app.use(cors());
 
 
 
@@ -88,7 +81,7 @@ app.use(cors());
  
 
 
-app.get('/api/locations',(req,res)=>{
+app.get('/api',(req,res)=>{
 
     //res.json(resources);
 const sql = "SELECT * FROM locations"
@@ -102,7 +95,7 @@ DB.all(sql,[],(err,rows)=>{
     id:          row.id,
     name:        row.name,
     category:    row.category,
-    address:     row.address,
+    location:    row.location,
     description: row.description,
     phone:       row.phone
 
@@ -123,15 +116,15 @@ catch(err){
 
 
 })
-app.post('/api/submit',(req,res)=>{
+app.post('/api',(req,res)=>{
 
     //res.json(resources);
-    const sql = "INSERT INTO submissions(name , category, address , description ,phone , hours ) VALUES(?,?,?,?,?,?)"
+    const sql = "INSERT INTO locations(name , category, location , description ,phone ) VALUES(?,?,?,?,?)"
     console.log('Test')
     console.log(req.body)
 
 try{
-DB.run(sql,[req.body.name , req.body.category, req.body.address, req.body.description , req.body.phone, req.body.hours],function(err){
+DB.run(sql,[req.body.name , req.body.category, req.body.location, req.body.description , req.body.phone],function(err){
 
  if (err){throw err}
  res.status(201)
@@ -151,8 +144,6 @@ catch(err){
 })
 
 
-
-
 /*
 app.get("/api",(req,res)=>{
 
@@ -162,4 +153,5 @@ app.get("/api",(req,res)=>{
 app.listen(8080,()=>{
     console.log("Server Started on port http://localhost:8080/");
 })
+
 
