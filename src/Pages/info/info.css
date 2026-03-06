@@ -1,0 +1,106 @@
+.info-page {
+  background-color: var(--yellow);
+  min-height: 100vh;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.info-container {
+  max-width: 1200px;
+  width: 100%;
+}
+
+.info-main-title {
+  text-align: center;
+  color: #1e3a8a;
+  font-size: 2.8rem;
+  margin-bottom: 10px;
+  padding: 10px;
+}
+
+.info-subtitle {
+  text-align: center;
+  color: #475569;
+  font-size: 1.2rem;
+  margin-bottom: 50px;
+}
+
+.fire-section {
+  margin-bottom: 60px;
+  background: #f97316;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.hurricane-section {
+  margin-bottom: 60px;
+  background: #3b82f6;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.thunderstorm-section {
+  margin-bottom: 60px;
+  background: #bf00ff;
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+}
+
+.disaster-header {
+  padding: 20px;
+  color: white;
+  text-align: center;
+}
+
+.disaster-header.hurricane {
+  background: linear-gradient(135deg, #1e3a8a, #3b82f6);
+}
+
+.disaster-header.wildfire {
+  background: linear-gradient(135deg, #b91c1c, #f97316);
+}
+
+.disaster-header.storm {
+   background: linear-gradient(135deg, #400050, #bf00ff); 
+}
+
+.info-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  padding: 30px;
+}
+
+.info-card {
+  padding: 20px;
+  background: #f8fafc;
+  border-radius: 10px;
+  border-left: 5px solid #e2e8f0;
+}
+
+.info-card h3 {
+  color: #1e3a8a;
+  margin-top: 0;
+  border-bottom: 2px solid #e2e8f0;
+  padding-bottom: 10px;
+}
+
+.info-card ul {
+  padding-left: 20px;
+  margin-bottom: 0;
+}
+
+.info-card li {
+  margin-bottom: 10px;
+  color: #334155;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .info-main-title { font-size: 2rem; }
+  .info-grid { padding: 15px; }
+}
